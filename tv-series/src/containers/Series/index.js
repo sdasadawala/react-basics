@@ -11,19 +11,20 @@ class Series extends Component {
   }
 
   onSeriesInputChange = e => {
-    this.setState({ seriesName: e.target.value, isFetching: true})
+    this.setState({ seriesName: e.target.value, isFetching: true});
+
     fetch(`http://api.tvmaze.com/search/shows?q=${e.target.value}`)
-      .then((response) => response.json())
-      .then(json => this.setState({ series: json, isFetching: false}))
+      .then(response => response.json())
+      .then(json => this.setState({ series: json, isFetching: false}));
   }
 
   render() {
-    const {series, seriesName, isFetching} = this.state;
+    const { series, seriesName, isFetching } = this.state;
     return (
       <div>
         <Intro message="Here you can find all of your most loved series"/>
         <div>
-          <input values= {seriesName} type="text" onChange={this.onSeriesInputChange} />
+          <input value= {seriesName} type="text" onChange={this.onSeriesInputChange} />
         </div>
         {
           !isFetching && series.length === 0 && seriesName.trim() === ''
